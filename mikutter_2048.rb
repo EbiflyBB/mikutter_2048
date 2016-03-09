@@ -6,7 +6,7 @@ Plugin.create :m2048 do
   tab :m2048, "2048" do
     set_deletable true
     temporary_tab
-    
+    over_2048 = false
     tbl = ::Gtk::Table.new(4, 4, true)
     opeLabel = ::Gtk::Label.new("←:A  ↑:W  →:D  ↓:S")
     tbl.attach_defaults(opeLabel, 0, 4, 4, 5)
@@ -35,7 +35,7 @@ Plugin.create :m2048 do
 		  i += 1
 		}
 	  }
-
+      over_2048 = false
     end
 
     tbl.signal_connect("key_press_event") do |wdt, evt|
@@ -53,8 +53,9 @@ Plugin.create :m2048 do
 	  end
       x, y = find_zero
 
-      if($field.max.max >= 2048)
-        print "すごい\n\n"
+      if($field.max.max >= 2048 && over_2048 == false)
+        Plugin.call(:update, nil, [Message.new(:message => "2048達成！おめでとう！", :system => true)])
+        over_2048 = true
       end
 	  if field_bk == $field
 	  else
