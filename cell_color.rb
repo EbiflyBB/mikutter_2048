@@ -18,7 +18,7 @@
 	elsif cell_num == 512
 		eval("@btn#{i}.markup = %Q[<span background=\"#F08080\" size=\"xx-large\">  512  </span>]")
 	elsif cell_num == 1024
-		eval("@btn#{i}.markup = %Q[<span background=\"#0D5C5C\" size=\"xx-large\">  1024  </span>]")
+		eval("@btn#{i}.markup = %Q[<span background=\"#CD5C5C\" size=\"xx-large\">  1024  </span>]")
 	elsif cell_num >= 2048
 		eval("@btn#{i}.markup = %Q[<span foreground=\"#FFFFFF\" background=\"#FF00FF\" size=\"xx-large\">  #{cell_num}  </span>]")
 	end
