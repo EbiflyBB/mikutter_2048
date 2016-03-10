@@ -37,6 +37,7 @@ btn_reset.signal_connect("clicked") do |b|
 			eval("@btn#{i}.set_label('#{field_cell}')")
 
 			set_cell_color(field_cell, i)
+			opeLabel.set_label("←:A  ↑:W  →:D  ↓:S")
             
 			i += 1
 		}
