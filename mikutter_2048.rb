@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 #ダークマターをロードする
 require File.join(File.dirname(__FILE__), '2048.rb')
+require File.join(File.dirname(__FILE__), 'cell_color.rb')
 
 Plugin.create :m2048 do
 
@@ -14,6 +15,7 @@ Plugin.create :m2048 do
     tab :m2048, "2048" do
       set_deletable true
       temporary_tab
+
       over_2048 = false
       tbl = ::Gtk::Table.new(4, 4, true)
       opeLabel = ::Gtk::Label.new("←:A  ↑:W  →:D  ↓:S")
@@ -26,8 +28,9 @@ Plugin.create :m2048 do
       0.upto(3){|y|
 	    0.upto(3){|x|
 		  field_cell = $field[y][x]
-		  eval("@btn#{i} = Gtk::Button.new('#{field_cell}')")
+		  eval("@btn#{i} = Gtk::Label.new('#{field_cell}')")
 		  eval("tbl.attach_defaults(@btn#{i}, x, x+1, y, y+1)")
+		  set_cell_color(field_cell, i)
 
 		  i += 1
 	    }
@@ -38,9 +41,11 @@ Plugin.create :m2048 do
 	    i = 0
 	    0.upto(3){|y|
 		  0.upto(3){|x|
-		    field_cell = $field[y][x]
-		    eval("@btn#{i}.set_label('#{field_cell}')")
-		    i += 1
+			field_cell = $field[y][x]
+			eval("@btn#{i}.set_label('#{field_cell}')")
+
+			set_cell_color(field_cell, i)
+			i += 1
 		  }
 	    }
         over_2048 = false
@@ -75,9 +80,11 @@ Plugin.create :m2048 do
 	    i = 0
 	    0.upto(3){|y|
 		  0.upto(3){|x|
-		    field_cell = $field[y][x]
-		    eval("@btn#{i}.set_label('#{field_cell}')")
-		    i += 1
+			field_cell = $field[y][x]
+			eval("@btn#{i}.set_label('#{field_cell}')")
+			set_cell_color(field_cell, i)
+
+			i += 1
 		  }
 	    }
 
